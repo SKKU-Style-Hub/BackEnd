@@ -1,0 +1,276 @@
+# service discovery 역할을 한다. 컨테이너간에 정보를 통신할 수 있도록 만들어준다.
+version: "3.5"
+
+services:
+  nginx:
+    build: ./nginx
+    ports:
+      # 외부(호스트 컴퓨터)에서 접근할 때는 82 -> 컴포즈내 같은 네트워크에 속한 컨테이너끼리 통신에는 80 
+      - "82:80" 
+    depends_on:
+      - auth
+      - stylingpostmngt
+      - mainfeedmngt
+      - commentmngt
+      - generalpostmngt
+      - stylingrequestmngt
+      - stylingresponsemngt
+      - marketmngt
+      - closetmngt
+      - profilemngt
+      - userclothingmngt
+    restart: always
+  
+########################   Micro-Services   ##################################
+
+  auth:
+    build: ./auth
+    ports:
+      - "8081:8080"
+    restart: always
+    volumes:
+      - ./auth/:/usr/src/app
+      # - ./usr/src/app/node_modules
+    links:
+      - userdb
+  
+  stylingpostmngt:
+    build: ./mainfeed/postContent/styling
+    ports:
+      - "8082:8080"
+    restart: always
+    volumes:
+      - ./mainfeed/postContent/styling/:/usr/src/app
+      # - ./usr/src/app/node_modules
+    links:
+      - stylingpostdb
+    networks:
+      - default
+      - rmoff_kafka
+
+  mainfeedmngt:
+    build: ./mainfeed/feed
+    ports:
+      - "8083:8080"
+    restart: always
+    volumes:
+      - ./mainfeed/feed:/usr/src/app
+      # - ./usr/src/app/node_modules
+    links:
+      - mainfeeddb
+    networks:
+      - default
+      - rmoff_kafka
+  
+  commentmngt:
+    build: ./mainfeed/comment
+    ports:
+      - "8084:8080"
+    restart: always
+    volumes:
+      - ./mainfeed/comment:/usr/src/app
+      # - ./usr/src/app/node_modules
+    links:
+      - commentdb
+    networks:
+      - default
+      - rmoff_kafka
+
+  generalpostmngt:
+    build: ./mainfeed/postContent/general
+    ports:
+      - "8085:8080"
+    restart: always
+    volumes:
+      - ./mainfeed/postContent/general:/usr/src/app
+      # - ./usr/src/app/node_modules
+    links:
+      - generalpostdb      
+    networks:
+      - default
+      - rmoff_kafka
+
+  marketmngt:
+    build: ./market
+    ports:
+      - "8086:8080"
+    restart: always
+    volumes:
+      - ./market:/usr/src/app
+      # - ./usr/src/app/node_modules
+    links:
+      - marketdb
+    networks:
+      - default
+      - rmoff_kafka
+
+  closetmngt:
+    build: ./user/closet
+    ports:
+      - "8087:8080"
+    restart: always
+    volumes:
+      - ./user/closet:/usr/src/app
+      # - ./usr/src/app/node_modules
+    links:
+      - closetdb
+    networks:
+      - default
+      - rmoff_kafka
+
+  profilemngt:
+    build: ./user/profile
+    ports:
+      - "8088:8080"
+    restart: always
+    volumes:
+      - ./user/profile:/usr/src/app
+      # - ./usr/src/app/node_modules
+    links:
+      - profiledb
+    networks:
+      - default
+      - rmoff_kafka
+
+  stylingrequestmngt:
+    build: ./styling/request
+    ports:
+      - "8089:8080"
+    restart: always
+    volumes:
+      - ./styling/request:/usr/src/app
+      # - ./usr/src/app/node_modules
+    links:
+      - stylingrequestdb
+    networks:
+      - default
+      - rmoff_kafka
+
+  stylingresponsemngt:
+    build: ./styling/response
+    ports:
+      - "8090:8080"
+    restart: always
+    volumes:
+      - ./styling/response:/usr/src/app
+      # - ./usr/src/app/node_modules
+    links:
+      - stylingresponsedb
+    networks:
+      - default
+      - rmoff_kafka
+
+  userclothingmngt:
+    build: ./user/clothing
+    ports:
+      - "8091:8080"
+    restart: always
+    volumes:
+      - ./user/clothing:/usr/src/app
+      # - ./usr/src/app/node_modules
+    links:
+      - userclothingdb
+    networks:
+      - default
+      - rmoff_kafka
+
+
+########################   Databases   ##################################
+  
+  userdb:
+    image: mongo
+    restart: always
+    ports: 
+      - "27017:27017"
+    volumes:
+      - ./data/userdb:/data/db        # 백업 장소
+
+  stylingpostdb:
+    image: mongo
+    restart: always
+    ports: 
+      - "27018:27017"
+    volumes:
+      - ./data/stylingpostdb:/data/db  # 백업 장소
+
+  mainfeeddb:
+    image: mongo
+    restart: always
+    ports: 
+      - "27019:27017"
+    volumes:
+      - ./data/mainfeeddb:/data/db  # 백업 장소
+
+  commentdb:
+    image: mongo
+    restart: always
+    ports: 
+      - "27020:27017"
+    volumes:
+      - ./data/commentdb:/data/db  # 백업 장소
+
+  generalpostdb:
+    image: mongo
+    restart: always
+    ports: 
+      - "27021:27017"
+    volumes:
+      - ./data/generalpostdb:/data/db  # 백업 장소
+
+  marketdb:
+    image: mongo
+    restart: always
+    ports: 
+      - "27022:27017"
+    volumes:
+      - ./data/marketdb:/data/db  # 백업 장소
+
+  closetdb:
+    image: mongo
+    restart: always
+    ports: 
+      - "27023:27017"
+    volumes:
+      - ./data/closetdb:/data/db  # 백업 장소
+
+  profiledb:
+    image: mongo
+    restart: always
+    ports: 
+      - "27024:27017"
+    volumes:
+      - ./data/profiledb:/data/db  # 백업 장소
+
+  stylingrequestdb:
+    image: mongo
+    restart: always
+    ports: 
+      - "27025:27017"
+    volumes:
+      - ./data/stylingrequestdb:/data/db  # 백업 장소
+
+  stylingresponsedb:
+    image: mongo
+    restart: always
+    ports: 
+      - "27026:27017"
+    volumes:
+      - ./data/stylingresponsedb:/data/db  # 백업 장소
+
+  userclothingdb:
+    image: mongo
+    restart: always
+    ports: 
+      - "27027:27017"
+    volumes:
+      - ./data/userclothingdb:/data/db  # 백업 장소
+
+
+########################   Networks   ##################################
+
+networks: 
+# 외부의 Kafka compose 와 연결
+  rmoff_kafka:
+    external: 
+      name: rmoff_kafka
+    

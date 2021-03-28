@@ -1,0 +1,19 @@
+{
+  "name": "comment",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node src/index.js",
+    "start:dev": "nodemon --watch src/ src/index.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^0.21.1",
+    "express": "^4.17.1",
+    "kafkajs": "^1.15.0",
+    "mongoose": "^5.12.1"
+  }
+}

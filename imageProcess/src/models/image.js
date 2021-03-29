@@ -2,8 +2,8 @@
 const mongoose = require('mongoose')
 
 const removeBackgroundSchema = new mongoose.Schema({
-    userName: {
-        type: String,
+    userProfile: {
+        type: Object,
         required: true
     },
     uploadedImage: {

@@ -10,7 +10,7 @@ WORKDIR /usr/src/app
 # Dependcy 설치(package*.json) => package.json 과 package-lock.json
 # 나머지 파일들도 한번에 복사 
 # 이 부분은 한번 npm install 이 실행되었던(재Build) 컨테이너는 캐시 정보가 있기 때문에 패스
-COPY package.json ./
+COPY package*.json ./
 
 # package.json에 작성되어 있는 dependecy 들을 설치해주기 
 RUN npm install

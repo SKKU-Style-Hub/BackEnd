@@ -20,8 +20,7 @@ const upload = multer({
 });
 
 router.post('/api/image/process/remove', upload.single('file'), (req, res) => {
-    const { userProfile, clothingId } = req.body
-    const userNickName = userProfile
+    const { userNickame, clothingId } = req.body
     console.log(req.file)
 
     var formdata = {
@@ -31,7 +30,7 @@ router.post('/api/image/process/remove', upload.single('file'), (req, res) => {
 
     request.post({ url: 'http://14.49.45.139:443', formData: formdata }, (req, res) => {
 
-    }).pipe(fs.createWriteStream(`./src/removed/${userNickName + "_" + clothingId}.png`))
+    }).pipe(fs.createWriteStream(`./src/removed/${userNickame + "_" + clothingId}.png`))
     res.send()
 })
 

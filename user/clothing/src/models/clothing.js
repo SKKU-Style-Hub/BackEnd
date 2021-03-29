@@ -6,55 +6,12 @@ const clothingSchema = new mongoose.Schema({
         type: Object,
         required: true
     },
-    clothingImg: {
+    clothingImage: {
         type: String,
         required: true
     },
-    category: {
-        type: String,
-        required: true
-    },
-    color: {
-        type: String,
-        required: true
-    },
-    colorDetail: {
-        type: String,
-    },
-    // 패턴
-    print: {
-        type: Array,
-    },
-    price: {
-        type: Number,
-    },
-    // Style
-    look: {
-        type: String,
-    },
-    texture: {
-        type: String
-    },
-    detail: {
-        type: String
-    },
-    length: {
-        type: String
-    },
-    sleeveLength: {
-        type: String
-    },
-    neckLine: {
-        type: String
-    },
-    fit: {
-        type: String
-    },
-    shape: {
-        type: String
-    },
-    brandName: {
-        type: String
+    tagResult: {
+        type: Object,
     },
     xCoordinate: {
         type: Number

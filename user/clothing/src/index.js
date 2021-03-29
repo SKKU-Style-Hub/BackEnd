@@ -1,12 +1,22 @@
 const express = require('express')
 const app = express()
+const port = 8080;
+
+
+const CreateTopic = require('./kafkaClient/createTopic')
+const ConsumeCloset = require('./kafkaClient/conClosetFromClothing')
+
+
+CreateTopic('userClothing')
+ConsumeCloset()
+
 
 const CreateClothing = require('./routes/createClothing')
 const UpdateClothing = require('./routes/updateClothing')
 const ReadClothing = require('./routes/readClothing')
 const DeleteClothing = require('./routes/deleteClothing')
 
-const port = 8080;
+
 
 const mongoose = require('mongoose')
 

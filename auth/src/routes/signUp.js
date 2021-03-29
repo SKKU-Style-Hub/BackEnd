@@ -6,22 +6,19 @@ require("dotenv").config()
 
 const router = express.Router()
 
-const users = []
-
 router.post('/api/auth/signup', async (req, res) => {
-    const { userNickname, password, gender, age } = req.body
+    const { userNickname, gender, age, profileImage } = req.body
+
     const user_info = {
         userNickname: userNickname,
-        password: password,
         gender: gender,
         age: age,
+        profileImage: profileImage, // 없으면 default로 보내면 됨
         role: 'user'
     }
-    users.push(user_info)
-    console.log(users)
 
     // Error Handling
-    const existingUser = await User.findOne({ userNickname });
+    const existingUser = await User.findOne({ userNickname: userNickname });
     if (existingUser) {
         res.send('사용중인 이름입니다.')
     } else {
@@ -34,20 +31,32 @@ router.post('/api/auth/signup', async (req, res) => {
             }
         }
         if (flag) {
-            const hashedPassword = await bcrypt.hash(password, 10)
-            user_info.password = hashedPassword
-            console.log(hashedPassword)
+            // 소셜 로그인 사용시 비밀번호 사용 X ( 로컬 회원가입 절차 X )
+            // const hashedPassword = await bcrypt.hash(password, 10)
+            // user_info.password = hashedPassword
+            // console.log(hashedPassword)
             user = new User(user_info)
-            user.save()
+            await user.save()
+
+            // JWT 반환 없이 userProfile 정보 주기
             // Generate JWT + Send JWT
-            jwt.sign({
-                userNickname: user.userNickname,
-                role: user.role
-            }, process.env.JWT_KEY, (err, token) => {
-                res.json({
-                    token
-                })
-            });
+            // jwt.sign({
+            //     userNickname: user.userNickname,
+            //     role: user.role
+            // }, process.env.JWT_KEY, (err, token) => {
+            //     res.json({
+            //         token
+            //     })
+            // });
+
+            // 회원가입 완료시 userProfile 정보 주기
+            const userProfile = {
+                userNickname: userNickname,
+                gender: gender,
+                profileImage: profileImage,
+                age: age
+            }
+            res.json(userProfile)
         }
     }
 })

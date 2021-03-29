@@ -11,7 +11,7 @@ const producer = kafka.producer()
 const produce = async function (name, msg) {
     await producer.connect()
     await producer.send({
-        topic: 'clothing',
+        topic: 'userClothing',
         messages: [{
             value: JSON.stringify(msg),
             headers: {

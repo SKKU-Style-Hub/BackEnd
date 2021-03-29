@@ -3,7 +3,7 @@ const app = express()
 const port = 8080
 
 const CreateTopic = require('./kafkaClient/createTopic')
-const ConsumeClothing = require('./kafkaClient/conClothingFromCloset')
+const ConsumeUserClothing = require('./kafkaClient/conUserClothingFromCloset')
 
 const CreateCloth = require('./routes/createClothing')
 const DeleteCloth = require('./routes/deleteClothing')
@@ -24,7 +24,7 @@ mongoose.connection
 // 토픽 생성
 CreateTopic('closet')
 // Clothing 구독
-ConsumeClothing()
+ConsumeUserClothing()
 
 
 app.use(express.json())

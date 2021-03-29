@@ -19,6 +19,7 @@ services:
       - closetmngt
       - profilemngt
       - userclothingmngt
+      - imageprocessmngt
     restart: always
   
 ########################   Micro-Services   ##################################
@@ -182,8 +183,6 @@ services:
     volumes:
       - ./imageProcess:/usr/src/app
       - ./usr/src/app/node_modules
-    # links:
-    #   - userclothingdb
     networks:
       - default
       - rmoff_kafka

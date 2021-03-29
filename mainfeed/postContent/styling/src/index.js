@@ -7,6 +7,7 @@ const port = 8080
 const CreatePost = require('./routes/createPost')
 const DeletePost = require('./routes/deletePost')
 const UpdatePost = require('./routes/updatePost')
+const UpdateResponse = require('./routes/updateResponse')
 
 
 const CreateTopic = require('./kafkaClient/createTopic')
@@ -39,9 +40,11 @@ app.use(express.urlencoded({ extended: false }));
 app.use(CreatePost)
 app.use(DeletePost)
 app.use(UpdatePost)
+app.use(UpdateResponse)
 
 
 app.listen(port, () => {
     console.log('Styling Post MNGT is running')
 })
+
 

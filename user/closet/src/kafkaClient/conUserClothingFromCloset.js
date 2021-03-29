@@ -6,12 +6,12 @@ const kafka = new Kafka({
     brokers: ['broker:9092']
 })
 
-const consumer = kafka.consumer({ groupId: 'conClothingFromCloset' })
+const consumer = kafka.consumer({ groupId: 'conUserClothingFromCloset' })
 
-const conClothingFromCloset = async () => {
+const conUserClothingFromCloset = async () => {
     await consumer.connect()
     await consumer.subscribe({
-        topic: 'clothing',
+        topic: 'userClothing',
         fromBeginning: true
     })
     await consumer.run({
@@ -21,9 +21,9 @@ const conClothingFromCloset = async () => {
 
             // User Cloth Created -> Create Cloth In Closet            
             if (type === 'UserClothingCreated') {
-                await axios.post('http://nginx/api/closet/create/cloth', {
+                await axios.post('http://nginx/api/closet/create/clothing', {
                     userProfile: value.userProfile,
-                    clothing: value.clothing
+                    clothing: value
                 })
             }
 
@@ -40,4 +40,4 @@ const conClothingFromCloset = async () => {
     })
 }
 
-module.exports = conClothingFromCloset
+module.exports = conUserClothingFromCloset

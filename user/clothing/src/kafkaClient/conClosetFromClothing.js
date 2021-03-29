@@ -8,7 +8,7 @@ const kafka = new Kafka({
 
 const consumer = kafka.consumer({ groupId: 'conClosetFromClothing' })
 
-const conPostFromFeed = async () => {
+const conClosetFromClothing = async () => {
     await consumer.connect()
     await consumer.subscribe({
         topic: 'closet',
@@ -30,13 +30,8 @@ const conPostFromFeed = async () => {
 
 
             // User CLoth Updated -> Update Cloth In Closet
-
-
-
-
-            console.log(value.userProfile)
         },
     })
 }
 
-module.exports = conPostFromFeed
+module.exports = conClosetFromClothing

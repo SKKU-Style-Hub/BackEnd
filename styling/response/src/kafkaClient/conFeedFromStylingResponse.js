@@ -21,7 +21,7 @@ const conFeedFromStylingResponse = async () => {
 
             // Styling Post Deleted -> Delete Styling
             if (type === 'StylingPostDeleted') {
-                await axios.post('http://nginx/api/styling/delete', {
+                await axios.post('http://nginx/api/styling/response/delete', {
                     feedId: value.feedId
                 })
             }

@@ -13,12 +13,11 @@ app.use(express.static('src'));
 
 app.use(RemoveBack)
 
-// post 는 userProfile 속 userNickName 과 clothID 활용
+// post 는 userProfile 속 userNickname 과 clothID 활용
 app.post('/api/image/process/get', (req, res) => {
     const { userProfile, clothId } = req.body
-    const userNickName = userProfile.userNickName
-
-    res.sendFile(__dirname + `/removed/${userNickName + "_" + clothId}.png`)
+    const userNickname = userProfile.userNickname
+    res.sendFile(__dirname + `/removed/${userNickname + "_" + clothId}.png`)
 })
 
 app.listen(port, () => {

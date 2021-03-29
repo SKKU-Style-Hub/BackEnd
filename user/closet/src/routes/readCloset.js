@@ -6,10 +6,10 @@ router.post('/api/closet/read', async (req, res) => {
     const { userProfile, targetUserProfile } = req.body
 
     if (targetUserProfile === undefined) {
-        const result = await Closet.findOne({ "userProfile.userNickName": userProfile.userNickName })
+        const result = await Closet.findOne({ "userProfile.userNickname": userProfile.userNickname })
         res.json(result)
     } else {
-        await Closet.findOne({ "userProfile.userNickName": targetUserProfile.userNickName })
+        await Closet.findOne({ "userProfile.userNickname": targetUserProfile.userNickname })
         res.json(result)
     }
 })

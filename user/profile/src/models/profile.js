@@ -3,7 +3,7 @@ const mongoose = require('mongoose')
 
 // profile 항목 더 생각해보기
 const profileSchema = new mongoose.Schema({
-    userName: {
+    userNickname: {
         type: String,
         required: true
     },

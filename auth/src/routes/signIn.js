@@ -6,13 +6,13 @@ const jwt = require('jsonwebtoken')
 require('dotenv').config()
 
 router.post('/api/auth/signin', async (req, res) => {
-    const { userNickName, password } = req.body
+    const { userNickname, password } = req.body
 
-    const existingUser = await User.findOne({ userNickName });
+    const existingUser = await User.findOne({ userNickname });
 
     if (existingUser && await bcrypt.compare(password, existingUser.password)) {
         jwt.sign({
-            userNickName: existingUser.userNickName,
+            userNickname: existingUser.userNickname,
             gender: existingUser.gender,
             profileImage: existingUser.profileImage,
             role: existingUser.role,

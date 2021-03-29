@@ -6,10 +6,10 @@ const Profile = require('../models/profile')
 router.post('/api/profile/create', async (req, res) => {
     const { userProfile, age, birthday, gender, profileImage } = req.body
 
-    const userName = userProfile.userName
+    const userNickname = userProfile.userNickname
 
     const profile = new Profile({
-        userName: userName,
+        userNickname: userNickname,
         age: age,
         birthday: birthday,
         gender: gender,

@@ -6,7 +6,7 @@ const Profile = require('../models/profile')
 router.post('/api/profile/update', async (req, res) => {
     const { userProfile, age, birthday, gender, profileImage } = req.body
 
-    const userName = userProfile.userName
+    const userNickname = userProfile.userNickname
     const query = {}
     if (age !== undefined) {
         query.age = age
@@ -21,7 +21,7 @@ router.post('/api/profile/update', async (req, res) => {
         query.profileImage = profileImage
     }
 
-    const profile = await Profile.findOneAndUpdate({ userName: userName }, query)
+    const profile = await Profile.findOneAndUpdate({ userNickname: userNickname }, query)
     res.send()
 })
 

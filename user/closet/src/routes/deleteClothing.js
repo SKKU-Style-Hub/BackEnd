@@ -5,7 +5,7 @@ const router = express.Router()
 
 router.post('/api/closet/delete/cloth', async (req, res) => {
     const { userProfile, clothingId } = req.body
-    await Closet.findOneAndUpdate({ "userProfile.userNickName": userProfile.userNickName },
+    await Closet.findOneAndUpdate({ "userProfile.userNickname": userProfile.userNickname },
         { $pull: { "cloths._id": clothingId } })
     ClosetClothingDeleted({
         clothingId: clothingId

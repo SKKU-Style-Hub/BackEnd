@@ -4,9 +4,9 @@ const router = express.Router()
 
 
 router.post('/api/auth/userprofile', async (req, res) => {
-    const { userNickName } = req.body
+    const { userNickname } = req.body
     // Error Handling
-    const existingUser = await User.findOne({ userNickName });
+    const existingUser = await User.findOne({ userNickname });
     res.json(existingUser)
 })
 

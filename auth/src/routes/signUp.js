@@ -9,9 +9,9 @@ const router = express.Router()
 const users = []
 
 router.post('/api/auth/signup', async (req, res) => {
-    const { userNickName, password, gender, age } = req.body
+    const { userNickname, password, gender, age } = req.body
     const user_info = {
-        userNickName: userNickName,
+        userNickname: userNickname,
         password: password,
         gender: gender,
         age: age,
@@ -21,7 +21,7 @@ router.post('/api/auth/signup', async (req, res) => {
     console.log(users)
 
     // Error Handling
-    const existingUser = await User.findOne({ userNickName });
+    const existingUser = await User.findOne({ userNickname });
     if (existingUser) {
         res.send('사용중인 이름입니다.')
     } else {
@@ -41,7 +41,7 @@ router.post('/api/auth/signup', async (req, res) => {
             user.save()
             // Generate JWT + Send JWT
             jwt.sign({
-                userNickName: user.userNickName,
+                userNickname: user.userNickname,
                 role: user.role
             }, process.env.JWT_KEY, (err, token) => {
                 res.json({

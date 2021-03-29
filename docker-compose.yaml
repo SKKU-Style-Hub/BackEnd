@@ -30,7 +30,7 @@ services:
     restart: always
     volumes:
       - ./auth/:/usr/src/app
-      # - ./usr/src/app/node_modules
+      - ./usr/src/app/node_modules
     links:
       - userdb
   
@@ -41,7 +41,7 @@ services:
     restart: always
     volumes:
       - ./mainfeed/postContent/styling/:/usr/src/app
-      # - ./usr/src/app/node_modules
+      - ./usr/src/app/node_modules
     links:
       - stylingpostdb
     networks:
@@ -55,7 +55,7 @@ services:
     restart: always
     volumes:
       - ./mainfeed/feed:/usr/src/app
-      # - ./usr/src/app/node_modules
+      - ./usr/src/app/node_modules
     links:
       - mainfeeddb
     networks:
@@ -69,7 +69,7 @@ services:
     restart: always
     volumes:
       - ./mainfeed/comment:/usr/src/app
-      # - ./usr/src/app/node_modules
+      - ./usr/src/app/node_modules
     links:
       - commentdb
     networks:
@@ -83,7 +83,7 @@ services:
     restart: always
     volumes:
       - ./mainfeed/postContent/general:/usr/src/app
-      # - ./usr/src/app/node_modules
+      - ./usr/src/app/node_modules
     links:
       - generalpostdb      
     networks:
@@ -97,7 +97,7 @@ services:
     restart: always
     volumes:
       - ./market:/usr/src/app
-      # - ./usr/src/app/node_modules
+      - ./usr/src/app/node_modules
     links:
       - marketdb
     networks:
@@ -111,7 +111,7 @@ services:
     restart: always
     volumes:
       - ./user/closet:/usr/src/app
-      # - ./usr/src/app/node_modules
+      - ./usr/src/app/node_modules
     links:
       - closetdb
     networks:
@@ -125,7 +125,7 @@ services:
     restart: always
     volumes:
       - ./user/profile:/usr/src/app
-      # - ./usr/src/app/node_modules
+      - ./usr/src/app/node_modules
     links:
       - profiledb
     networks:
@@ -139,7 +139,7 @@ services:
     restart: always
     volumes:
       - ./styling/request:/usr/src/app
-      # - ./usr/src/app/node_modules
+      - ./usr/src/app/node_modules
     links:
       - stylingrequestdb
     networks:
@@ -153,7 +153,7 @@ services:
     restart: always
     volumes:
       - ./styling/response:/usr/src/app
-      # - ./usr/src/app/node_modules
+      - ./usr/src/app/node_modules
     links:
       - stylingresponsedb
     networks:
@@ -167,7 +167,7 @@ services:
     restart: always
     volumes:
       - ./user/clothing:/usr/src/app
-      # - ./usr/src/app/node_modules
+      - ./usr/src/app/node_modules
     links:
       - userclothingdb
     networks:

@@ -20,17 +20,17 @@ const upload = multer({
 });
 
 router.post('/api/image/process/remove', upload.single('file'), (req, res) => {
-    const { userNickame, clothingId } = req.body
-    console.log(req.file)
+    console.log('Image Background Removal')
+    const { userNickname, clothingId } = req.body
 
+    console.log('start')
     var formdata = {
         submit: 'upload',
-        file: fs.createReadStream(`./${req.file.path}`)
+        file: fs.createReadStream(`/usr/src/app/${req.file.path}`)
     }
-
     request.post({ url: 'http://14.49.45.139:443', formData: formdata }, (req, res) => {
 
-    }).pipe(fs.createWriteStream(`./src/removed/${userNickame + "_" + clothingId}.png`))
+    }).pipe(fs.createWriteStream(`/usr/src/app/src/removed/${userNickname + "_" + clothingId}.png`))
     res.send()
 })
 

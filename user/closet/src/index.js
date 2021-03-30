@@ -5,10 +5,11 @@ const port = 8080
 const CreateTopic = require('./kafkaClient/createTopic')
 const ConsumeUserClothing = require('./kafkaClient/conUserClothingFromCloset')
 
-const CreateCloth = require('./routes/createClothing')
-const DeleteCloth = require('./routes/deleteClothing')
-const UpdateCloth = require('./routes/updateClothing')
-const ReadCloset = require('./routes/readCloset')
+const CreateClothing = require('./routes/createClothing')
+const DeleteClothing = require('./routes/deleteClothing')
+const UpdateClothing = require('./routes/updateClothing')
+const ReadMyCloset = require('./routes/readMyCloset')
+const ReadOthersCloset = require('./routes/readOthersCloset')
 
 
 const mongoose = require('mongoose')
@@ -16,7 +17,7 @@ const mongoose = require('mongoose')
 mongoose.connect("mongodb://closetdb/closet", { useNewUrlParser: true, useUnifiedTopology: true });
 // 연결확인 -> Event Listner
 mongoose.connection
-    .once('open', () => console.log('MainfeedDB Connected'))
+    .once('open', () => console.log('ClosetDB Connected'))
     .on('error', (err) => {
         console.log("Your error is ", err)
     })
@@ -30,10 +31,11 @@ ConsumeUserClothing()
 app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
 
-app.use(CreateCloth)
-app.use(DeleteCloth)
-app.use(UpdateCloth)
-app.use(ReadCloset)
+app.use(CreateClothing)
+app.use(DeleteClothing)
+app.use(UpdateClothing)
+app.use(ReadMyCloset)
+app.use(ReadOthersCloset)
 
 app.listen(port, () => {
     console.log('Closet MNGT is Running')

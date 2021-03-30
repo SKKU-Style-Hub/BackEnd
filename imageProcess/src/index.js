@@ -15,8 +15,10 @@ app.use(RemoveBack)
 
 // post 는 userProfile 속 userNickname 과 clothID 활용
 app.post('/api/image/process/get', (req, res) => {
+    console.log('get image')
     const { userProfile, clothingId } = req.body
     const userNickname = userProfile.userNickname
+
     res.sendFile(__dirname + `/removed/${userNickname + "_" + clothingId}.png`)
 })
 

@@ -2,7 +2,7 @@ const express = require('express');
 // const verifyToken = require('../middlewares/verifytoken')
 const Clothing = require('../models/clothing')
 const router = express.Router();
-const UserClotingCreated = require('../events/userClothingCreated')
+const UserClothingCreated = require('../events/UserClothingCreated')
 
 router.post('/api/clothing/create', async (req, res) => {
     const { userProfile, tagResult, clothingImage } = req.body
@@ -13,7 +13,7 @@ router.post('/api/clothing/create', async (req, res) => {
         clothingImage: clothingImage
     })
     await clothing.save()
-    UserClotingCreated(clothing)
+    UserClothingCreated(clothing)
     res.send()
 })
 

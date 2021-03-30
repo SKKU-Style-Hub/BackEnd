@@ -21,6 +21,7 @@ const conUserClothingFromCloset = async () => {
 
             // User Cloth Created -> Create Cloth In Closet            
             if (type === 'UserClothingCreated') {
+                console.log('UserClothingCreated')
                 await axios.post('http://nginx/api/closet/create/clothing', {
                     userProfile: value.userProfile,
                     clothing: value

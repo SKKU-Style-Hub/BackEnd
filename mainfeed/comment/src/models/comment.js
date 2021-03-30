@@ -17,6 +17,9 @@ const commentSchema = new mongoose.Schema({
     reply: {
         type: Array
     },
+    likes: {
+        type: Array
+    }
 }, { timestamps: true })
 
 const Comment = mongoose.model('Comment', commentSchema)

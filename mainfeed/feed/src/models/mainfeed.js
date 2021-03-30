@@ -14,6 +14,9 @@ const MainFeedSchema = new mongoose.Schema({
     },
     comments: {
         type: Array,
+    },
+    likes: {
+        type: Array,
     }
 }, { timestamps: true });
 

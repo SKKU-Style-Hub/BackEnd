@@ -13,8 +13,9 @@ router.post('/api/clothing/create', async (req, res) => {
         clothingImage: clothingImage
     })
     await clothing.save()
+    console.log(clothing)
     UserClothingCreated(clothing)
-    res.send()
+    res.json(clothing)
 })
 
 module.exports = router

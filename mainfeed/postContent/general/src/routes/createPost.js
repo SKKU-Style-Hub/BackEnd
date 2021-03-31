@@ -22,7 +22,7 @@ router.post('/api/post/general/create', async (req, res) => {
     await post.save()
     PostCreated(post)
 
-    res.send()
+    res.json(post)
 })
 
 module.exports = router

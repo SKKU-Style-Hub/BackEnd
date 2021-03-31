@@ -14,7 +14,7 @@ router.post('/api/mainfeed/create', async (req, res) => {
         content: content,
     })
     await feed.save()
-    res.send()
+    res.json(feed)
 })
 
 module.exports = router

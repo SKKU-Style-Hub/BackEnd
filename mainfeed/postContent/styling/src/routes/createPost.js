@@ -16,7 +16,7 @@ router.post('/api/post/styling/create', async (req, res) => {
     })
     await post.save()
     StylingPostCreated(post)
-    res.send();
+    res.json(post);
 })
 
 

@@ -18,7 +18,7 @@ router.post('/api/styling/request/create', async (req, res) => {
 
     await stylingRequest.save()
     StylingRequestCreated(stylingRequest)
-    res.send()
+    res.json(stylingRequest)
 })
 
 module.exports = router

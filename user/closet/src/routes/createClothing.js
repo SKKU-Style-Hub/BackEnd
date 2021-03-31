@@ -18,9 +18,8 @@ router.post('/api/closet/create/clothing', async (req, res) => {
             clothingArray: clothing
         })
         await initCloset.save()
+        res.json(initCloset)
     }
-
-    res.send()
 })
 
 module.exports = router

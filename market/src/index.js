@@ -2,17 +2,22 @@ const express = require('express')
 const app = express()
 const mongoose = require('mongoose')
 
-const SellerCreateCloth = require('./routes/sellerCreateCloth')
-const UserCreateCloth = require('./routes/userCreateCloth')
+const CreateSellerClothing = require('./routes/createSellerClothing')
+const DeleteSellerClothing = require('./routes/deleteSellerClothing')
+const UpdateSellerClothing = require('./routes/updateSellerClothing')
+const ReadSellerClothing = require('./routes/readSellerClothing')
 
 const port = 8080;
 
-app.use(express.json())
+app.use(express.json({
+    limit: "10mb"
+}))
 app.use(express.urlencoded({ extended: false }))
 
-
-app.use(SellerCreateCloth)
-app.use(UserCreateCloth)
+app.use(CreateSellerClothing)
+app.use(DeleteSellerClothing)
+app.use(UpdateSellerClothing)
+app.use(ReadSellerClothing)
 
 mongoose.connect("mongodb://marketdb/cloth", { useNewUrlParser: true, useUnifiedTopology: true });
 // 연결확인 -> Event Listner

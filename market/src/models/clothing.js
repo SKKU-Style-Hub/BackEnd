@@ -2,26 +2,16 @@ const mongoose = require('mongoose')
 const AutoIncrement = require('mongoose-sequence')(mongoose)
 
 const clothSchema = new mongoose.Schema({
-    brandName: {
-        type: String,
+    // userProfile 의 seller 버전
+    sellerProfile: {
+        type: Object
     },
-    price: {
-        type: Number,
-    },
-    username: {
+    clothingImage: {
         type: String,
         required: true
     },
-    pattern: {
-        type: Array
-    },
-    color: {
-        type: String,
-        required: true
-    },
-    style: {
-        type: String,
-        required: true
+    tagResult: {
+        type: Object
     },
     marketClothingId: {
         type: Number,

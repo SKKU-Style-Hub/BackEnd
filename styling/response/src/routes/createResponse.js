@@ -15,7 +15,12 @@ router.post('/api/styling/response/create', async (req, res) => {
     const stylistNickname = stylistProfile.userNickname
     // 최신 response 번호 ( unique ) -> 한 요청에 제안 여러번 참여 가능
     const lastStylingResponse = await Response.find().sort({ stylingResponseId: -1 }).limit(1)
-    const lastStylingResponseId = lastStylingResponse[0].stylingResponseId + 1
+    if (lastStylingResponse) {
+        const lastStylingResponseId = lastStylingResponse[0].stylingResponseId + 1
+    } else {
+        const lastStylingResponseId = 1
+    }
+
     const imageFileName = `${stylingPostId}_${stylistNickname}_${lastStylingResponseId}.png`
 
 

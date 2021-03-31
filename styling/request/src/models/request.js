@@ -1,4 +1,5 @@
 const mongoose = require('mongoose')
+const AutoIncrement = require('mongoose-sequence')(mongoose)
 
 const requestSchema = new mongoose.Schema({
     userProfile: {
@@ -29,8 +30,15 @@ const requestSchema = new mongoose.Schema({
     requestContent: {
         type: String,
         required: true
+    },
+    stylingRequestId: {
+        type: Number,
+        default: 1,
+        index: true
     }
 }, { timestamps: true })
+
+requestSchema.plugin(AutoIncrement, { inc_field: 'stylingRequestId' })
 
 const Request = mongoose.model('Request', requestSchema)
 module.exports = Request

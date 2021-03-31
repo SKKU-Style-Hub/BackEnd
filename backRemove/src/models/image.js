@@ -6,15 +6,12 @@ const removeBackgroundSchema = new mongoose.Schema({
         type: Object,
         required: true
     },
-    uploadedImage: {
-        type: String,
-        required: true
-    },
-    removedImage: {
+    imageType: {
         type: String,
         required: true
     }
 })
 
 const RemBg = mongoose.model('Image', removeBackgroundSchema)
-module.exports = Rembg
+module.exports = RemBg
+

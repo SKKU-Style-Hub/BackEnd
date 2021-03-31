@@ -176,12 +176,12 @@ services:
       - rmoff_kafka
 
   imageprocessmngt:
-    build: ./imageProcess
+    build: ./backRemove
     ports:
       - "8092:8080"
     restart: always
     volumes:
-      - ./imageProcess:/usr/src/app
+      - ./backRemove:/usr/src/app
       - ./usr/src/app/node_modules
     networks:
       - default

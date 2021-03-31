@@ -1,4 +1,5 @@
 const mongoose = require('mongoose')
+const AutoIncrement = require('mongoose-sequence')(mongoose)
 
 // 옷장에서는 옷 정보만 넘어주면 
 const closetSchema = new mongoose.Schema({
@@ -10,8 +11,15 @@ const closetSchema = new mongoose.Schema({
     clothingArray: {
         type: Array,
         required: true
+    },
+    closetId: {
+        type: Number,
+        default: 1,
+        index: true
     }
 }, { timestamps: true })
+
+closetSchema.plugin(AutoIncrement, { inc_field: 'closetId' })
 
 const Closet = mongoose.model('Closet', closetSchema)
 module.exports = Closet

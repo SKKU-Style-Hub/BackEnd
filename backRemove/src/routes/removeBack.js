@@ -3,7 +3,6 @@ const router = express.Router()
 const fs = require('fs')
 const request = require('request')
 const multer = require('multer')
-const path = require('path')
 
 // Multer Default -> 보안을 위해 파일명 및 확장자 변경
 // const upload = multer({ dest: 'uploads/' });

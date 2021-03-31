@@ -1,7 +1,7 @@
 const express = require('express')
 const router = express.Router()
 const Response = require('../models/response')
-const StylingResponseCreated = require('../events/StylingResponseCreated')
+const StylingResponseDeleted = require('../events/StylingResponseDeleted')
 
 router.post('/api/styling/response/delete', async (req, res) => {
     const { responseId, stylingId } = req.body

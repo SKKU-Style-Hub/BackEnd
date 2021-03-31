@@ -1,5 +1,5 @@
 const mongoose = require('mongoose')
-
+const AutoIncrement = require('mongoose-sequence')(mongoose)
 
 // profile 항목 더 생각해보기
 const profileSchema = new mongoose.Schema({
@@ -24,7 +24,14 @@ const profileSchema = new mongoose.Schema({
         enum: ['user', 'seller', 'admin'],
         required: true
     },
+    profileId: {
+        type: Number,
+        default: 1,
+        index: true
+    }
 }, { timestamps: true })
+
+profileSchema.plugin(AutoIncrement, { inc_field: 'profileId' })
 
 const Profile = mongoose.model('Profile', profileSchema)
 module.exports = Profile

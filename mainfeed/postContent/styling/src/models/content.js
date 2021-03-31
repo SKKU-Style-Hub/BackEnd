@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const AutoIncrement = require('mongoose-sequence')(mongoose)
 
 const stylingSchema = new mongoose.Schema({
     userProfile: {
@@ -12,7 +13,14 @@ const stylingSchema = new mongoose.Schema({
     stylingResult: {
         type: Array,    //Styling Response 객체
     },
+    stylingPostId: {
+        type: Number,
+        default: 1,
+        index: true
+    }
 }, { timestamps: true })
+
+stylingSchema.plugin(AutoIncrement, { inc_field: 'stylingPostId' })
 
 const StylingPost = mongoose.model('Post', stylingSchema)
 module.exports = StylingPost;

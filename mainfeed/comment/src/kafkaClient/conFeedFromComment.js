@@ -25,6 +25,14 @@ const conPostFromFeed = async () => {
                     feedId: value.feedId
                 })
             }
+
+            // Comment Like Up From Feed
+            if (type === 'CommentLikeUp') {
+                await axios.post('', {
+                    commentLikeUp: value
+                })
+            }
+
             console.log(value.userProfile)
         },
     })

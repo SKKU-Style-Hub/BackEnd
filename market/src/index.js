@@ -19,7 +19,7 @@ app.use(DeleteSellerClothing)
 app.use(UpdateSellerClothing)
 app.use(ReadSellerClothing)
 
-mongoose.connect("mongodb://marketdb/cloth", { useNewUrlParser: true, useUnifiedTopology: true });
+mongoose.connect("mongodb://marketdb/cloth", { useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false });
 // 연결확인 -> Event Listner
 mongoose.connection
     .once('open', () => console.log('Market DB Connected'))

@@ -24,7 +24,7 @@ app.use(DeletePost)
 app.use(UpdatePost)
 
 
-mongoose.connect("mongodb://generalpostdb/post", { useNewUrlParser: true, useUnifiedTopology: true });
+mongoose.connect("mongodb://generalpostdb/post", { useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false });
 // 연결확인 -> Event Listner
 mongoose.connection
     .once('open', () => console.log('GeneralPostDB Connected'))

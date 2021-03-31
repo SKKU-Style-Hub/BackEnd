@@ -37,7 +37,7 @@ app.use(CreateFeedComment)
 app.use(UpdateStylingResult)
 app.use(UpdateFeedComment)
 
-mongoose.connect("mongodb://mainfeeddb/mainfeed", { useNewUrlParser: true, useUnifiedTopology: true });
+mongoose.connect("mongodb://mainfeeddb/mainfeed", { useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false });
 // 연결확인 -> Event Listner
 mongoose.connection
     .once('open', () => console.log('MainfeedDB Connected'))

@@ -14,7 +14,7 @@ const ReadOthersCloset = require('./routes/readOthersCloset')
 
 const mongoose = require('mongoose')
 
-mongoose.connect("mongodb://closetdb/closet", { useNewUrlParser: true, useUnifiedTopology: true });
+mongoose.connect("mongodb://closetdb/closet", { useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false });
 // 연결확인 -> Event Listner
 mongoose.connection
     .once('open', () => console.log('ClosetDB Connected'))

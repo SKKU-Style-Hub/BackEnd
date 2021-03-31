@@ -25,7 +25,7 @@ app.use(UpdateRequest)
 app.use(GetMyRequestList)
 
 
-mongoose.connect("mongodb://stylingrequestdb/request", { useNewUrlParser: true, useUnifiedTopology: true });
+mongoose.connect("mongodb://stylingrequestdb/request", { useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false });
 // 연결확인 -> Event Listner
 mongoose.connection
     .once('open', () => console.log('Market DB Connected'))

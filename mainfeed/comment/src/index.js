@@ -20,7 +20,7 @@ const DeleteReply = require('./routes/deleteReply')
 const UpdateReply = require('./routes/updateReply')
 
 
-mongoose.connect("mongodb://commentdb/comment", { useNewUrlParser: true, useUnifiedTopology: true });
+mongoose.connect("mongodb://commentdb/comment", { useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false });
 // 연결확인 -> Event Listner
 mongoose.connection
     .once('open', () => console.log('CommentDB Connected'))

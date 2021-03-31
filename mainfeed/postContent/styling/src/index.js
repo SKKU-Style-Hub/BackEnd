@@ -22,7 +22,7 @@ ConsumeStylingRequest()
 
 
 
-mongoose.connect("mongodb://stylingpostdb/post", { useNewUrlParser: true, useUnifiedTopology: true });
+mongoose.connect("mongodb://stylingpostdb/post", { useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false });
 // 연결확인 -> Event Listner
 mongoose.connection
     .once('open', () => console.log('StylingPostDB Connected'))

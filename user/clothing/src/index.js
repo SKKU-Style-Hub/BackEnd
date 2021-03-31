@@ -21,7 +21,7 @@ const DeleteClothing = require('./routes/deleteClothing')
 
 const mongoose = require('mongoose')
 
-mongoose.connect("mongodb://userclothingdb/clothing", { useNewUrlParser: true, useUnifiedTopology: true });
+mongoose.connect("mongodb://userclothingdb/clothing", { useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false });
 // 연결확인 -> Event Listner
 mongoose.connection
     .once('open', () => console.log('MainfeedDB Connected'))

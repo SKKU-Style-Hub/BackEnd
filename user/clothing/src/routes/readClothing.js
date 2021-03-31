@@ -9,7 +9,7 @@ router.post('/api/clothing/read', async (req, res) => {
     // 1. 소비자가 옷 등록 시 productl_id 없다 ( 옷 등록 시 이름 기입하는 것 필요? )
     const { clothingId } = req.body
 
-    res.send(await Clothing.findOne({ _id: clothingId }))
+    res.send(await Clothing.findOne({ clothingId: clothingId }))
 })
 
 module.exports = router

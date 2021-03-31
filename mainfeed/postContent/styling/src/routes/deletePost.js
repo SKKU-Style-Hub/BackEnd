@@ -9,8 +9,9 @@ const router = express.Router()
 // StylingPostCreated Event Emitted
 router.post('/api/post/styling/delete', async (req, res) => {
     const { stylingPostId } = req.body
-    await Post.deleteOne({ _id: stylingPostId })
-    StylingPostDeleted({ stylingPostId: stylingPostId })
+    const stylingPost = await MainFeed.findOne({ stylingPostId: stylingPostId })
+    await Post.deleteOne({ stylingPostId: stylingPostId })
+    StylingPostDeleted({ stylingRequestId: stylingPost.stylingRequest.stylingRequestId })
     res.send();
 })
 

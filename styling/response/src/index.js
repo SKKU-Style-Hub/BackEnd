@@ -14,7 +14,10 @@ const DeleteResponse = require('./routes/deleteResponse')
 // const UpdateResponse = require('./routes/updateResponse')
 // const ReadResponse = require('./routes/readResponse')
 
-app.use(express.json())
+app.use(express.json({
+    limit: "10mb"
+}))
+app.use(express.static('src/image'))
 app.use(express.urlencoded({ extended: false }))
 
 app.use(CreateResponse)

@@ -10,11 +10,12 @@ router.post('/api/post/styling/update/response', async (req, res) => {
         stylingPostId: stylingPostId,
         stylingResponse: stylingResponse
     })
-    await Post.findOneAndUpdate({ _id: stylingPostId }, { $push: { stylingResult: stylingResponse } })
-    const updatedStylingPost = await Post.findOne({ _id: stylingPostId })
+    await Post.findOneAndUpdate({ stylingPostId: stylingPostId }, { $push: { stylingResult: stylingResponse } })
+    const updatedStylingPost = await Post.findOne({ stylingPostId: stylingPostId })
     StylingResponseUpdated(updatedStylingPost)
     console.log('Styling Response Updated to Styling Post Success')
     res.send()
+
 })
 
 

@@ -6,14 +6,15 @@ const StylingFeedDeleted = require('../events/StylingFeedDeleted')
 
 
 router.post('/api/mainfeed/delete', async (req, res) => {
+    // Feed 삭제 시 포스트 내용 삭제해야 하는가? 
     const { feedId } = req.body
-    const feed = await MainFeed.findOne({ _id: feedId })
+    const feed = await MainFeed.findOne({ feedId: feedId })
     if (feed.contentType === 'general') {
-        await MainFeed.deleteOne({ _id: feedId })
-        GeneralFeedDeleted({ feedId: feed.content._id })
+        await MainFeed.deleteOne({ feedId: feedId })
+        // GeneralFeedDeleted({ generalPostId: feed.content.generalPostId })
     } else {
-        await MainFeed.deleteOne({ _id: feedId })
-        StylingFeedDeleted({ feedId: feed.content._id })
+        await MainFeed.deleteOne({ feedId: feedId })
+        // StylingFeedDeleted({ stylingPostId: feed.content.stylingPostId })
     }
     res.send()
 })

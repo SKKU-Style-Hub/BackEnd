@@ -4,9 +4,9 @@ const router = express.Router()
 
 
 router.post('/api/post/general/delete', async (req, res) => {
-    const { feedId } = req.body
+    const { generalPostId } = req.body
 
-    await GeneralPost.deleteOne({ _id: feedId })
+    await GeneralPost.deleteOne({ generalPostId: generalPostId })
     res.send()
 })
 

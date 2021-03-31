@@ -10,6 +10,9 @@ router.post('/api/closet/create/clothing', async (req, res) => {
     if (await Closet.findOneAndUpdate({ "userProfile.userNickname": userProfile.userNickname }, { $push: { clothingArray: clothing } })) {
 
     } else {
+
+        delete clothing.userProfile
+
         const initCloset = new Closet({
             userProfile: userProfile,
             clothingArray: clothing

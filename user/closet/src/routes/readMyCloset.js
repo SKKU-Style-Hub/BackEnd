@@ -3,8 +3,8 @@ const Closet = require('../models/closet')
 const router = express.Router()
 
 router.post('/api/closet/read/my', async (req, res) => {
-    const { userProfile } = req.body
-    const result = await Closet.findOne({ "userProfile.userNickname": userProfile.userNickname })
+    const { closetId } = req.body
+    const result = await Closet.findOne({ "closetId": closetId })
     res.json(result)
 })
 

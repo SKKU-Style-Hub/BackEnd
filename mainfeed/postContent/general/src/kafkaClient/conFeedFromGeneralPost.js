@@ -22,26 +22,9 @@ const conPostFromFeed = async () => {
             // Post Created -> Create Feed            
             if (type === 'GeneralFeedDeleted') {
                 await axios.post('http://nginx/api/post/general/delete', {
-                    feedId: value.feedId
+                    generalPostId: value.generalPostId
                 })
             }
-
-            // Post Updated -> Update Feed
-            if (type === 'GeneralPostUpdated') {
-
-            }
-
-            // Post Deleted -> Delete Feed
-
-
-            // Comment Created -> Create Feed
-
-
-            // Comment Updated -> Update Feed
-
-
-            // Commet Deleted -> Delete Feed
-
             console.log(value.userProfile)
         },
     })

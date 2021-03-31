@@ -4,12 +4,13 @@ const ClosetClothingDeleted = require('../events/closetClothingDeleted')
 const router = express.Router()
 
 router.post('/api/closet/delete/clothing', async (req, res) => {
-    const { userProfile, clothingId } = req.body
-    await Closet.findOneAndUpdate({ "userProfile.userNickname": userProfile.userNickname },
-        { $pull: { "cloths._id": clothingId } })
+    const { closetId, clothingId } = req.body
+    await Closet.findOneAndUpdate({ "closetId": closetId },
+        { $pull: { "clothingArray.clothingId": clothingId } })
     ClosetClothingDeleted({
         clothingId: clothingId
     })
+    console.log('Delete Clothing')
     res.send()
 })
 

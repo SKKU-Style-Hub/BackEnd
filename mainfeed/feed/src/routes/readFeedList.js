@@ -7,7 +7,7 @@ router.post('/api/mainfeed/list/read', async (req, res) => {
     const { lastFeedId, limit } = req.body
     // 현재 피드 기준 이전 피드 20개 가져오기
     // Less Than 쿼리 사용 
-    const feedList = await MainFeed.find({ "feedId": { $lt: lastFeedId } }).sort({ "feedId": -1 }).limit(limit)
+    const feedList = await MainFeed.find({ "feedId": { $gte: lastFeedId } }).sort({ "feedId": 1 }).limit(limit)
     // 이후 업데이트
     res.send(feedList)
 })

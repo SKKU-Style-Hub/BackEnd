@@ -30,9 +30,14 @@ router.post('/api/styling/response/create', async (req, res) => {
 
 
     const stylistNickname = stylistProfile.userNickname
+
     // 최신 response 번호 ( unique ) -> 한 요청에 제안 여러번 참여 가능
-    // const lastStylingResponse = await Response.find().sort({ stylingResponseId: -1 }).limit(1)
-    const lastStylingResponseId = 1
+    const lastStylingResponseId = 0
+    await Response.find().sort({ stylingResponseId: -1 }).limit(1)
+        .then((result) => {
+            lastStylingResponseId = result[0].stylingResponseId + 1
+        })
+        .catch()
 
     // if (lastStylingResponse.length !== 0) {
     //     lastStylingResponseId = lastStylingResponse[0].stylingResponseId + 1

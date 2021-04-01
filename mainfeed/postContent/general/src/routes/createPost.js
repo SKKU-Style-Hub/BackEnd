@@ -2,23 +2,54 @@ const express = require('express')
 const GeneralPost = require('../models/content')
 const router = express.Router()
 const PostCreated = require('../events/postCreated')
-const axios = require('axios')
+const { Storage } = require('@google-cloud/storage')
 
 
 router.post('/api/post/general/create', async (req, res) => {
     const { userProfile, postImage, postContent } = req.body
 
+
+    const gc = new Storage({
+        keyFilename: path.join(__dirname, "./spark-308723-6c9758b9bb5c.json"),
+        projectId: 'spark-308723'
+    })
+
+    // base64 decode, 현재는 이미지 한개만 처리 -> 다중 이미지 처리 관련 서비스 새로 만들어야 할 듯
+    const base64Image = postImage.split(';base64,').pop();
+    const lastGeneralPostId = 0
+    const userNickname = userProfile.userNickname
+    await GeneralPost.find().sort({ generalPostId: -1 }).limit(1)
+        .then((result) => {
+            lastGeneralPostId = result[0].generalPostId + 1
+        })
+        .catch((err) => {
+
+        })
+    const imageFileName = `${userNickname}_${lastGeneralPostId}.png`
+    const filePath = `./src/image/${imageFileName}`
+
+
+    fs.writeFile(filePath, base64Image, { encoding: 'base64' }, function (err) {
+        console.log(`${imageFileName} Created`);
+    });
+
+    gc.getBuckets().then(x => console.log(x))
+
+    await gc.bucket('sparkspark').upload(path.join(__dirname, `../image/${imageFileName}`), {
+        destination: imageFileName,
+    });
+
+    const imageURL = `https://storage.googleapis.com/sparkspark/${imageFileName}`
+
+
     const post = new GeneralPost(
         {
             userProfile: userProfile,
-            postImage: postImage,
+            postImage: imageURL,
             postContent: postContent
         }
     )
-    const event = {
-        postImage: postImage,
-        postContent: postContent
-    }
+
     await post.save()
     PostCreated(post)
 

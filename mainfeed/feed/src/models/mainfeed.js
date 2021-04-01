@@ -17,6 +17,7 @@ const MainFeedSchema = new mongoose.Schema({
         type: Array,
     },
     // userProfile
+    // isLike 가 이해가 안 가는데 
     likes: {
         type: Array,
     },

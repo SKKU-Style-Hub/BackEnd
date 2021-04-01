@@ -22,10 +22,14 @@ const upload = multer({
 });
 
 router.post('/api/back/removal/remove', upload.single('file'), async (req, res) => {
+
     const gc = new Storage({
         keyFilename: path.join(__dirname, './spark-308723-6c9758b9bb5c.json'),
         projectId: 'spark-308723'
     })
+
+    const bucket = gc.bucket('sparkspark')
+
 
     console.log('Image Background Removal')
     const { userNickname } = req.body
@@ -51,14 +55,24 @@ router.post('/api/back/removal/remove', upload.single('file'), async (req, res) 
     const imageFileName = `${userNickname + "_" + imageId}.png`
 
     request.post({ url: 'http://14.49.45.139:443', formData: formdata }, (req, res) => {
-
-    })
-        .pipe(fs.createWriteStream(`/usr/src/app/src/removed/${imageFileName}`))
-        .pipe(await gc.bucket('sparkspark').upload(path.join(__dirname, `../removed/${imageFileName}`), {
-            destination: imageFileName,
-        }))
+        console.log('Request Posting')
+    }).pipe(await bucket.file(`${imageFileName}`).createWriteStream({}))
+    //.pipe(await fs.createWriteStream(path.join(__dirname, `../removed/${imageFileName}`)))
 
 
+    // await fs.createReadStream(path.join(__dirname, `../removed/${imageFileName}`))
+    //     .pipe(bucket.file(`${imageFileName}`).createWriteStream({
+    //         resumable: false,
+    //         gzip: true
+    //     }))
+    //     .on('error', function (err) { })
+    //     .on('finish', function () {
+    //         console.log("upload finish")
+    //     });
+
+    // await gc.bucket('sparkspark').upload(path.join(__dirname, `../removed/${imageFileName}`), {
+    //     destination: imageFileName,
+    // }).then().catch((err) => console.log(err))
 
     res.send(`https://storage.googleapis.com/sparkspark/${imageFileName}`)
 })

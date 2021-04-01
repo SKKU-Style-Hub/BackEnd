@@ -12,7 +12,7 @@ router.post('/api/comment/create', async (req, res) => {
         comment: comment,
         feedId: feedId
     })
-    await newComment.save()
+    await newComment.save().then().catch(console.log("comment error"))
     CommentCreated(newComment)
     res.json(newComment)
 })

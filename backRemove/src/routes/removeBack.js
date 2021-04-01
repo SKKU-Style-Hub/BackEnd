@@ -23,10 +23,13 @@ router.post('/api/image/process/remove', upload.single('file'), (req, res) => {
     const { userNickname, clothingId } = req.body
 
     console.log('start')
+    console.log(req.file.path)
+    console.log(`/usr/src/app/${req.file.path}`)
     var formdata = {
         submit: 'upload',
         file: fs.createReadStream(`/usr/src/app/${req.file.path}`)
     }
+    console.log(req.file.path)
     request.post({ url: 'http://14.49.45.139:443', formData: formdata }, (req, res) => {
 
     }).pipe(fs.createWriteStream(`/usr/src/app/src/removed/${userNickname + "_" + clothingId}.png`))

@@ -6,12 +6,12 @@ const kafka = new Kafka({
     brokers: ['broker:9092']
 })
 
-const consumer = kafka.consumer({ groupId: 'conStylingResponseFromStylingRequest' })
+const consumer = kafka.consumer({ groupId: 'conStylingPostFromStylingRequest' })
 
 const conStylingPostFromStylingRequest = async () => {
     await consumer.connect()
     await consumer.subscribe({
-        topic: 'stylingResponse',
+        topic: 'stylingPost',
         fromBeginning: true
     })
     await consumer.run({
@@ -21,13 +21,13 @@ const conStylingPostFromStylingRequest = async () => {
 
             // Styling Feed Deleted -> Delete Styling
             if (type === 'StylingPostDeleted') {
-                await axios.post('http://nginx/api/styling/delete', {
+                await axios.post('http://nginx/api/styling/request/delete', {
                     feedId: value.feedId
                 })
             }
 
             if (type === 'StylingResponseCreated') {
-                await axios.post('http://nginx/api/styling/create/count', {
+                await axios.post('http://nginx/api/styling/request/create/count', {
                     updatedStylingPost: value
                 })
             }

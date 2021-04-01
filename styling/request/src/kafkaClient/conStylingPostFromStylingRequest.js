@@ -26,6 +26,13 @@ const conStylingPostFromStylingRequest = async () => {
                 })
             }
 
+            if (type === 'StylingResponseCreated') {
+                await axios.post('http://nginx/api/styling/create/count', {
+                    updatedStylingPost: value
+                })
+            }
+
+
             console.log(value.userProfile)
         },
     })

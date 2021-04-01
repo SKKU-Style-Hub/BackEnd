@@ -8,7 +8,7 @@ const CreatePost = require('./routes/createPost')
 const ReadPost = require('./routes/readPost')
 const UpdatePost = require('./routes/updatePost')
 const DeletePost = require('./routes/deletePost')
-const UpdateResponse = require('./routes/updateResponse')
+const CreateResponse = require('./routes/createResponse')
 const ReadMyPostList = require('./routes/readMyPostList')
 
 
@@ -42,7 +42,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(CreatePost)
 app.use(DeletePost)
 app.use(UpdatePost)
-app.use(UpdateResponse)
+app.use(CreateResponse)
 app.use(ReadMyPostList)
 app.use(ReadPost)
 

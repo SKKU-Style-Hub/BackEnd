@@ -34,8 +34,8 @@ const conStylingPostFromFeed = async () => {
             }
 
             // Styling Response Updated -> Update Feed
-            if (type === 'StylingResponseUpdated') {
-                await axios.post('http://nginx/api/mainfeed/update/response', {
+            if (type === 'StylingResponseCreated') {
+                await axios.post('http://nginx/api/mainfeed/create/response', {
                     stylingPostId: value.stylingPostId,
                     stylingResponse: value
                 })

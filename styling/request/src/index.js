@@ -13,7 +13,7 @@ ConsumeStylingPost()
 const CreateRequest = require('./routes/createRequest')
 const DeleteRequest = require('./routes/deleteRequest')
 const ReadRequest = require('./routes/readRequest')
-const UpdateRequest = require('./routes/updateRequest')
+const CreateCount = require('./routes/createCount')
 const GetMyRequestList = require('./routes/getMyRequestList')
 
 app.use(express.json())
@@ -21,7 +21,7 @@ app.use(express.urlencoded({ extended: false }))
 app.use(CreateRequest)
 app.use(DeleteRequest)
 app.use(ReadRequest)
-app.use(UpdateRequest)
+app.use(CreateCount)
 app.use(GetMyRequestList)
 
 

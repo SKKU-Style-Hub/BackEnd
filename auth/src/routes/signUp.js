@@ -7,7 +7,7 @@ require("dotenv").config()
 const router = express.Router()
 
 router.post('/api/auth/signup', async (req, res) => {
-    const { userNickname, gender, age, profileImage } = req.body
+    const { userNickname, gender, age, profileImage, socialLogin } = req.body
 
     const user_info = {
         userNickname: userNickname,
@@ -35,6 +35,10 @@ router.post('/api/auth/signup', async (req, res) => {
             // const hashedPassword = await bcrypt.hash(password, 10)
             // user_info.password = hashedPassword
             // console.log(hashedPassword)
+            if (socialLogin) {
+                user.socialLogin = socialLogin
+            }
+
             user = new User(user_info)
             await user.save()
 

@@ -16,7 +16,9 @@ const ReadRequest = require('./routes/readRequest')
 const CreateCount = require('./routes/createCount')
 const GetMyRequestList = require('./routes/getMyRequestList')
 
-app.use(express.json())
+app.use(express.json(
+    { limit: "10mb" }
+))
 app.use(express.urlencoded({ extended: false }))
 app.use(CreateRequest)
 app.use(DeleteRequest)

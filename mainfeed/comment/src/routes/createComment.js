@@ -16,5 +16,4 @@ router.post('/api/comment/create', async (req, res) => {
     CommentCreated(newComment)
     res.json(newComment)
 })
-
 module.exports = router

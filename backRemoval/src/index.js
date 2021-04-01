@@ -21,18 +21,18 @@ app.use(express.urlencoded({ extended: false }))
 app.use(express.static('src'));
 
 
-// mongoose.connect("mongodb://imageprocessdb/image", { useNewUrlParser: true, useUnifiedTopology: true });
-// // 연결확인 -> Event Listner
-// mongoose.connection
-//     .once('open', () => console.log('ClosetDB Connected'))
-//     .on('error', (err) => {
-//         console.log("Your error is ", err)
-//     })
+mongoose.connect("mongodb://backremovaldb/image", { useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false });
+// 연결확인 -> Event Listner
+mongoose.connection
+    .once('open', () => console.log('Back removal Connected'))
+    .on('error', (err) => {
+        console.log("Your error is ", err)
+    })
 
 app.use(RemoveBack)
 
 // post 는 userProfile 속 userNickname 과 clothID 활용
-app.post('/api/image/process/get', (req, res) => {
+app.post('/api/back/removal/get', (req, res) => {
     console.log('get image')
     const { userProfile, clothingId } = req.body
     const userNickname = userProfile.userNickname

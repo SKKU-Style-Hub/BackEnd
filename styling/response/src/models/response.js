@@ -27,7 +27,7 @@ const responseSchema = new mongoose.Schema({
     },
     stylingResponseId: {
         type: Number,
-        default: 1,
+        default: 0,
         index: true
     }
 }, { timestamps: true })

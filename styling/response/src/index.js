@@ -29,7 +29,7 @@ app.use(DeleteResponse)
 mongoose.connect("mongodb://stylingresponsedb/response", { useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false });
 // 연결확인 -> Event Listner
 mongoose.connection
-    .once('open', () => console.log('Market DB Connected'))
+    .once('open', () => console.log('Response DB Connected'))
     .on('error', (err) => {
         console.log("Your error is ", err)
     })

@@ -7,5 +7,4 @@ router.post('/api/styling/response/read', async (req, res) => {
     const stylingResponse = await Response.findOne({ stylingResponseId: stylingResponseId })
     res.json(stylingResponse)
 })
-
 module.exports = router

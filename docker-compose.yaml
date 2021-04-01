@@ -19,7 +19,7 @@ services:
       - closetmngt
       - profilemngt
       - userclothingmngt
-      - imageprocessmngt
+      - backremovalmngt
     restart: always
   
 ########################   Micro-Services   ##################################
@@ -175,13 +175,13 @@ services:
       - default
       - rmoff_kafka
 
-  imageprocessmngt:
-    build: ./backRemove
+  backremovalmngt:
+    build: ./backRemoval
     ports:
       - "8092:8080"
     restart: always
     volumes:
-      - ./backRemove:/usr/src/app
+      - ./backRemoval:/usr/src/app
       - ./usr/src/app/node_modules
     networks:
       - default
@@ -276,6 +276,14 @@ services:
       - "27027:27017"
     volumes:
       - ./data/userclothingdb:/data/db  # 백업 장소
+
+  backremovaldb:
+    image: mongo
+    restart: always
+    ports: 
+      - "27028:27017"
+    volumes:
+      - ./data/backremovaldb:/data/db  # 백업 장소
 
 
 ########################   Networks   ##################################

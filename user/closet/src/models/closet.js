@@ -14,7 +14,7 @@ const closetSchema = new mongoose.Schema({
     },
     closetId: {
         type: Number,
-        default: 1,
+        default: 0,
         index: true
     }
 }, { timestamps: true })

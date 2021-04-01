@@ -22,7 +22,7 @@ const clothingSchema = new mongoose.Schema({
     },
     clothingId: {
         type: Number,
-        default: 1,
+        default: 0,
         index: true
     }
 }, { timestamps: true });

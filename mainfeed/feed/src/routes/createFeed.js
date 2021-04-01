@@ -8,6 +8,9 @@ router.post('/api/mainfeed/create', async (req, res) => {
     const { userProfile, content, contentType } = req.body
     // 최신 10개 출력  
     // id 내림차순 정렬
+
+    delete content.userProfile
+
     const feed = new MainFeed({
         contentType: contentType,
         userProfile: userProfile,

@@ -29,11 +29,10 @@ const requestSchema = new mongoose.Schema({
     },
     requestContent: {
         type: String,
-        required: true
     },
     stylingRequestId: {
         type: Number,
-        default: 1,
+        default: 0,
         index: true
     },
     resultCounter: {

@@ -15,7 +15,7 @@ router.post('/api/clothing/create', async (req, res) => {
     await clothing.save()
     console.log(clothing)
     UserClothingCreated(clothing)
-    res.json(clothing)
+    res.json(clothing.clothingId)
 })
 
 module.exports = router

@@ -15,7 +15,7 @@ const clothSchema = new mongoose.Schema({
     },
     marketClothingId: {
         type: Number,
-        default: 1,
+        default: 0,
         index: true
     }
 }, { timestamps: true })

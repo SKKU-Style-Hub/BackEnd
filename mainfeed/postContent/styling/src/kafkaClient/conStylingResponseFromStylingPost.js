@@ -23,7 +23,7 @@ const conStylingResponseFromStylingPost = async () => {
             // Styling Requset Created -> Create Styling Post
             if (type === 'StylingResponseCreated') {
                 console.log('StylingResponseCreated')
-                await axios.post('http://nginx/api/post/styling/update/response', {
+                await axios.post('http://nginx/api/post/styling/create/response', {
                     stylingPostId: value.stylingPostId,
                     stylingResponse: value
                 })

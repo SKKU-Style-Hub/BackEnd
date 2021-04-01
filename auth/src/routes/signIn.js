@@ -7,9 +7,15 @@ require('dotenv').config()
 
 router.post('/api/auth/signin', async (req, res) => {
     // password는 삭제
-    const { userNickname } = req.body
+    const { userNickname, socialLogin } = req.body
 
-    const existingUser = await User.findOne({ userNickname: userNickname });
+    const existingUser = ''
+
+    if (socialLogin) {
+        existingUser = await User.findOne({ userNickname: userNickname });
+    } else {
+        existingUser = await User.findOne({ socialLogin: socialLogin });
+    }
 
     // 디바이스에서 앱 키면 내장 DB에서 보유하고 있는 userNickname 을 DB에서 확인 후 로그인
     if (existingUser) {

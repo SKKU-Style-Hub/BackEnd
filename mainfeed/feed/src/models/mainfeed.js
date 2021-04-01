@@ -16,6 +16,7 @@ const MainFeedSchema = new mongoose.Schema({
     comments: {
         type: Array,
     },
+    // userProfile
     likes: {
         type: Array,
     },

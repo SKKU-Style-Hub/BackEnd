@@ -6,12 +6,12 @@ const kafka = new Kafka({
     brokers: ['broker:9092']
 })
 
-const consumer = kafka.consumer({ groupId: 'conStylingResponseFromStylingRequest' })
+const consumer = kafka.consumer({ groupId: 'conStylingPostFromStylingRequest' })
 
 const conStylingPostFromStylingRequest = async () => {
     await consumer.connect()
     await consumer.subscribe({
-        topic: 'stylingResponse',
+        topic: 'stylingPost',
         fromBeginning: true
     })
     await consumer.run({

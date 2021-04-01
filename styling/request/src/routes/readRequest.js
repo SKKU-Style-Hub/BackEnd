@@ -4,11 +4,11 @@ const Request = require('../models/request')
 
 router.post('/api/styling/request/read', async (req, res) => {
     // 유저 이름으로 요청서 read 하게 만들어야 한다.
-    const { requestId } = req.body
+    const { stylingRequestId } = req.body
 
-    const result = await Request.findOne({ _id: requestId })
+    const result = await Request.findOne({ stylingRequestId: stylingRequestId })
     // request 데이터 객체 json 반환
-    res.json(JSON.stringify(result))
+    res.json(result)
 })
 
 module.exports = router

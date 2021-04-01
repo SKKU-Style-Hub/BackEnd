@@ -5,9 +5,11 @@ const app = express()
 const port = 8080
 
 const CreatePost = require('./routes/createPost')
-const DeletePost = require('./routes/deletePost')
+const ReadPost = require('./routes/readPost')
 const UpdatePost = require('./routes/updatePost')
+const DeletePost = require('./routes/deletePost')
 const UpdateResponse = require('./routes/updateResponse')
+const ReadMyPostList = require('./routes/readMyPostList')
 
 
 const CreateTopic = require('./kafkaClient/createTopic')
@@ -41,6 +43,8 @@ app.use(CreatePost)
 app.use(DeletePost)
 app.use(UpdatePost)
 app.use(UpdateResponse)
+app.use(ReadMyPostList)
+app.use(ReadPost)
 
 
 app.listen(port, () => {

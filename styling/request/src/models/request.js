@@ -35,6 +35,10 @@ const requestSchema = new mongoose.Schema({
         type: Number,
         default: 1,
         index: true
+    },
+    resultCounter: {
+        type: Number,
+        default: 0
     }
 }, { timestamps: true })
 

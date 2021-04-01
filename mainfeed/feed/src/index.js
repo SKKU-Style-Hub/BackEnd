@@ -13,6 +13,8 @@ const DeleteFeed = require('./routes/deleteFeed')
 const CreateFeedComment = require('./routes/createFeedComment')
 const UpdateStylingResult = require('./routes/updateStylingResponse')
 const UpdateFeedComment = require('./routes/updateFeedComment')
+const UpFeedLike = require('./routes/upFeedLike')
+const DownFeedLike = require('./routes/downFeedLike')
 
 const app = express();
 const port = 8080;
@@ -36,6 +38,8 @@ app.use(DeleteFeed)
 app.use(CreateFeedComment)
 app.use(UpdateStylingResult)
 app.use(UpdateFeedComment)
+app.use(UpFeedLike)
+app.use(DownFeedLike)
 
 mongoose.connect("mongodb://mainfeeddb/mainfeed", { useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false });
 // 연결확인 -> Event Listner

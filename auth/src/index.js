@@ -8,6 +8,7 @@ const SignUp = require('./routes/signUp')
 const SignIn = require('./routes/signIn')
 const SignOut = require('./routes/signOut')
 const getCurrentUser = require('./routes/currentUser')
+const CheckUserNickname = require('./routes/checkUserNickname')
 
 // Connect to MongoDB -> docker-compose.yml 의 links 정보로 주소명에 서비스명 사용 가능
 mongoose.connect("mongodb://userdb/user", { useNewUrlParser: true, useUnifiedTopology: true });
@@ -29,7 +30,7 @@ app.use(SignIn)
 app.use(SignOut)
 app.use(getCurrentUser)
 app.use(SignUp)
-
+app.use(CheckUserNickname)
 // Route 미들웨어
 
 

@@ -12,6 +12,7 @@ const userSchema = new mongoose.Schema({
     // },
     socialLogin: {
         type: String,
+        default: 'none',
         index: true
     },
     gender: {

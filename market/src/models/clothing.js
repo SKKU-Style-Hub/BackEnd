@@ -1,17 +1,24 @@
 const mongoose = require('mongoose')
 const AutoIncrement = require('mongoose-sequence')(mongoose)
 
-const clothSchema = new mongoose.Schema({
+const clothingSchema = new mongoose.Schema({
     // userProfile 의 seller 버전
     sellerProfile: {
         type: Object
     },
     clothingImage: {
         type: String,
-        required: true
     },
     tagResult: {
         type: Object
+    },
+    price: {
+        type: Number,
+        default: 0
+    },
+    brand: {
+        type: String,
+        default: ''
     },
     marketClothingId: {
         type: Number,
@@ -20,7 +27,7 @@ const clothSchema = new mongoose.Schema({
     }
 }, { timestamps: true })
 
-clothSchema.plugin(AutoIncrement, { inc_field: 'marketClothingId' })
+clothingSchema.plugin(AutoIncrement, { inc_field: 'marketClothingId' })
 
-const Cloth = mongoose.model('Cloth', clothSchema)
-module.exports = Cloth
+const Clothing = mongoose.model('Cloth', clothingSchema)
+module.exports = Clothing

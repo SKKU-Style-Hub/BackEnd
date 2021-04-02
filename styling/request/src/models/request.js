@@ -38,6 +38,14 @@ const requestSchema = new mongoose.Schema({
     resultCounter: {
         type: Number,
         default: 0
+    },
+    likeCounter: {
+        type: Number,
+        default: 0
+    },
+    commentCounter: {
+        type: Number,
+        default: 0
     }
 }, { timestamps: true })
 

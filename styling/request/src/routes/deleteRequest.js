@@ -3,9 +3,8 @@ const router = express.Router()
 const Request = require('../models/request')
 
 router.post('/api/styling/request/delete', async (req, res) => {
-    const { userProfile, requestId } = req.body
-    const userNickname = userProfile.userNickname
-    await Request.deleteOne({ "userProfile.userNickname": userNickname, _id: requestId })
+    const { stylingRequestId } = req.body
+    await Request.deleteOne({ stylingRequestId: stylingRequestId })
     res.send()
 })
 

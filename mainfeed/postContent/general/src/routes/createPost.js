@@ -15,7 +15,7 @@ router.post('/api/post/general/create', async (req, res) => {
     })
 
     // base64 decode, 현재는 이미지 한개만 처리 -> 다중 이미지 처리 관련 서비스 새로 만들어야 할 듯
-    const base64Image = postImage.split(';base64,').pop();
+
     const lastGeneralPostId = 0
     const userNickname = userProfile.userNickname
     await GeneralPost.find().sort({ generalPostId: -1 }).limit(1)
@@ -23,29 +23,41 @@ router.post('/api/post/general/create', async (req, res) => {
             lastGeneralPostId = result[0].generalPostId + 1
         })
         .catch((err) => {
-
         })
-    const imageFileName = `${userNickname}_${lastGeneralPostId}.png`
-    const filePath = `./src/image/${imageFileName}`
+
+    var base64Image
+    var imageFileName
+    var filePath
+    var imageUrl
+    var imageUrlList = []
+
+    for (var imageNumber = 0; imageNumber < postImage.length; imageNumber++) {
+        base64Image = postImage[imageNumber].split(';base64,').pop();
+
+        imageFileName = `${userNickname}_${lastGeneralPostId}_${imageNumber}.png`
+        filePath = `./src/image/${imageFileName}`
 
 
-    fs.writeFile(filePath, base64Image, { encoding: 'base64' }, function (err) {
-        console.log(`${imageFileName} Created`);
-    });
+        fs.writeFile(filePath, base64Image, { encoding: 'base64' }, function (err) {
+            console.log(`${imageFileName} Created`);
+        });
 
-    gc.getBuckets().then(x => console.log(x))
+        gc.getBuckets().then(x => console.log(x))
 
-    await gc.bucket('sparkspark').upload(path.join(__dirname, `../image/${imageFileName}`), {
-        destination: imageFileName,
-    });
+        await gc.bucket('sparkspark').upload(path.join(__dirname, `../image/${imageFileName}`), {
+            destination: imageFileName,
+        });
 
-    const imageURL = `https://storage.googleapis.com/sparkspark/${imageFileName}`
+        imageUrl = `https://storage.googleapis.com/sparkspark/${imageFileName}`
+        imageUrlList.push(iamgeUrl)
+    }
+
 
 
     const post = new GeneralPost(
         {
             userProfile: userProfile,
-            postImage: imageURL,
+            postImage: imageUrlList,
             postContent: postContent
         }
     )

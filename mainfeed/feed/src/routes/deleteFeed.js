@@ -11,10 +11,10 @@ router.post('/api/mainfeed/delete', async (req, res) => {
     const feed = await MainFeed.findOne({ feedId: feedId })
     if (feed.contentType === 'general') {
         await MainFeed.deleteOne({ feedId: feedId })
-        // GeneralFeedDeleted({ generalPostId: feed.content.generalPostId })
+        GeneralFeedDeleted({ generalPostId: feed.content.generalPostId })
     } else {
         await MainFeed.deleteOne({ feedId: feedId })
-        // StylingFeedDeleted({ stylingPostId: feed.content.stylingPostId })
+        StylingFeedDeleted({ stylingPostId: feed.content.stylingPostId })
     }
     res.send()
 })

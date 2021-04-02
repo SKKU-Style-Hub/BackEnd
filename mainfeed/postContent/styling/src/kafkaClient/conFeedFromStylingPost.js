@@ -31,6 +31,13 @@ const conFeedFromStylingPost = async () => {
 
             }
 
+            if (type === 'UpFeedLikeStylingPost') {
+                await axios.post('http://nginx/api/post/styling/update', {
+                    stylingPostId: value.stylingPostId,
+                    userProfile: value.userProfile
+                })
+            }
+
             // Post Deleted -> Delete Feed
 
 

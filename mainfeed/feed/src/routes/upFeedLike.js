@@ -1,7 +1,8 @@
 const express = require('express')
 const MainFeed = require('../models/mainfeed')
 const router = express.Router()
-const UpFeedLike = require('../events/UpFeedLike')
+const UpFeedLikeGeneralPost = require('../events/UpFeedLikeGeneralPost')
+const UpFeedLikeStylingPost = require('../events/UpFeedLikeStylingPost')
 
 
 router.post('/api/mainfeed/like/up', async (req, res) => {
@@ -13,12 +14,12 @@ router.post('/api/mainfeed/like/up', async (req, res) => {
     await MainFeed.findOneAndUpdate({ feedId: feedId }, { $push: { likes: userProfile } })
 
     if (contentType === 'general') {
-        UpFeedLike({
+        UpFeedLikeGeneralPost({
             generalPostId: feed.content.generalPostId,
             userProfile: userProfile
         })
     } else {
-        UpFeedLike({
+        UpFeedLikeStylingPost({
             stylingPostId: feed.content.stylingPostId,
             userProfile: userProfile
         })

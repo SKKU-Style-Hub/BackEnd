@@ -15,6 +15,7 @@ const CreateStylingResult = require('./routes/createStylingResponse')
 const UpdateFeedComment = require('./routes/updateFeedComment')
 const UpFeedLike = require('./routes/upFeedLike')
 const DownFeedLike = require('./routes/downFeedLike')
+const ReadMyFeedListByContentType = require('./routes/readMyFeedListByContentType')
 
 const app = express();
 const port = 8080;
@@ -42,6 +43,7 @@ app.use(CreateStylingResult)
 app.use(UpdateFeedComment)
 app.use(UpFeedLike)
 app.use(DownFeedLike)
+app.use(ReadMyFeedListByContentType)
 
 mongoose.connect("mongodb://mainfeeddb/mainfeed", { useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false });
 // 연결확인 -> Event Listner

@@ -18,7 +18,7 @@ router.post('/api/post/general/create', async (req, res) => {
 
     // base64 decode, 현재는 이미지 한개만 처리 -> 다중 이미지 처리 관련 서비스 새로 만들어야 할 듯
 
-    const lastGeneralPostId = 0
+    var lastGeneralPostId = 0
     const userNickname = userProfile.userNickname
     await GeneralPost.find().sort({ generalPostId: -1 }).limit(1)
         .then((result) => {

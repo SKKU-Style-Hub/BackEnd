@@ -54,7 +54,7 @@ router.post('/api/post/general/create', async (req, res) => {
         });
 
         imageUrl = `https://storage.googleapis.com/sparkspark/${imageFileName}`
-        imageUrlList.push(iamgeUrl)
+        imageUrlList.push(imageUrl)
     }
 
 

@@ -34,27 +34,26 @@ router.post('/api/post/general/create', async (req, res) => {
     var imageUrlList = []
 
     for (var imageNumber = 0; imageNumber < postImage.length; imageNumber++) {
-        if (postImage[imageNumber].indexOf(';base64')) {
-            base64Image = postImage[imageNumber].split(';base64,').pop();
-        } else {
-            base64Image = postImage[imageNumber]
-        }
+
         imageFileName = `${userNickname}_${lastGeneralPostId}_${imageNumber}.png`
         filePath = `./src/image/${imageFileName}`
 
+        if (postImage[imageNumber].indexOf(';base64') !== -1) {
+            console.log('Yes base64')
+            base64Image = postImage[imageNumber].split(';base64,').pop();
+            await fs.writeFile(filePath, base64Image, { encoding: 'base64' }, function (err) {
+                console.log(`${imageFileName} Created`);
+            });
+            await gc.bucket('sparkspark').upload(path.join(__dirname, `../image/${imageFileName}`), {
+                destination: imageFileName,
+            });
 
-        await fs.writeFile(filePath, base64Image, { encoding: 'base64' }, function (err) {
-            console.log(`${imageFileName} Created`);
-        });
-
-        gc.getBuckets().then(x => console.log(x))
-
-        await gc.bucket('sparkspark').upload(path.join(__dirname, `../image/${imageFileName}`), {
-            destination: imageFileName,
-        });
-
-        imageUrl = `https://storage.googleapis.com/sparkspark/${imageFileName}`
-        imageUrlList.push(imageUrl)
+            imageUrl = `https://storage.googleapis.com/sparkspark/${imageFileName}`
+            imageUrlList.push(imageUrl)
+        } else {
+            console.log('No base64')
+            imageUrlList.push(postImage[imageNumber])
+        }
     }
 
 

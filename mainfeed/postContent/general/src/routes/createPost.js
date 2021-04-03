@@ -32,8 +32,11 @@ router.post('/api/post/general/create', async (req, res) => {
     var imageUrlList = []
 
     for (var imageNumber = 0; imageNumber < postImage.length; imageNumber++) {
-        base64Image = postImage[imageNumber].split(';base64,').pop();
-
+        if (postImage[imageNumber].indexOf(';base64')) {
+            base64Image = postImage[imageNumber].split(';base64,').pop();
+        } else {
+            base64Image = postImage[imageNumber]
+        }
         imageFileName = `${userNickname}_${lastGeneralPostId}_${imageNumber}.png`
         filePath = `./src/image/${imageFileName}`
 

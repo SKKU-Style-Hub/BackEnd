@@ -4,6 +4,7 @@ const router = express.Router()
 const PostCreated = require('../events/postCreated')
 const { Storage } = require('@google-cloud/storage')
 const path = require("path")
+const fs = require('fs')
 
 
 router.post('/api/post/general/create', async (req, res) => {
@@ -42,7 +43,7 @@ router.post('/api/post/general/create', async (req, res) => {
         filePath = `./src/image/${imageFileName}`
 
 
-        fs.writeFile(filePath, base64Image, { encoding: 'base64' }, function (err) {
+        await fs.writeFile(filePath, base64Image, { encoding: 'base64' }, function (err) {
             console.log(`${imageFileName} Created`);
         });
 

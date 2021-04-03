@@ -38,7 +38,7 @@ router.post('/api/post/general/create', async (req, res) => {
         imageFileName = `${userNickname}_${lastGeneralPostId}_${imageNumber}.png`
         filePath = `./src/image/${imageFileName}`
 
-        if (postImage[imageNumber].indexOf(';base64') !== -1) {
+        if (postImage[imageNumber].indexOf(';base64,') !== -1) {
             console.log('Yes base64')
             base64Image = postImage[imageNumber].split(';base64,').pop();
             await fs.writeFile(filePath, base64Image, { encoding: 'base64' }, function (err) {

@@ -3,6 +3,7 @@ const GeneralPost = require('../models/content')
 const router = express.Router()
 const PostCreated = require('../events/postCreated')
 const { Storage } = require('@google-cloud/storage')
+const path = require("path")
 
 
 router.post('/api/post/general/create', async (req, res) => {
